@@ -63,13 +63,13 @@
         <section id="service">
             <h2>Service</h2>
             <p>
-                Service 也是一个对象，它对应一个代理规则。一个service就是对一类网络的响应与测试样例。
+                Service 是一个对象，它对应一个代理规则。一个service就是对一类网络的响应与测试样例。
             </p>
             <strong>Demo:</strong>
             <pre>
-var Service = require('../../../proxy-tester/index').Service;
+var Service = require('proxy-tester').Service;
 var service = new Service({
-    url: 'http://ad.m.iqiyi.com/api',
+    url: 'http://xxx.xxx.com/test',
     name: 'api',
     method: 'get',
     verify: function(req, res, services) {
