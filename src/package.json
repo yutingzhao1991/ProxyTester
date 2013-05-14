@@ -1,0 +1,18 @@
+{
+  "name": "proxy-tester",
+  "description": "http proxy automatic test framework.",
+  "version": "0.0.1",
+  "author": {
+    "name": "Yu Tingzhao",
+    "email": "yutingzhao1991@sina.com"
+  },
+  "keywords": [
+    "proxy-tester",
+    "automatic test framework"
+  ],
+  "main": "./index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/yutingzhao1991/proxyTest.git"
+  }
+}

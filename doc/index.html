@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AdSdkTest</title>
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="./lib/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./lib/bootstrap/bootstrap-responsive.min.css">
+    <link rel="stylesheet" type="text/css" href="./style/main.css">
+    <script type="text/javascript" src="./lib/jquery/jquery-1.8.2.min.js"></script>
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="./index.html">ProxyTester</a>
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li class="active">
+                        <a href="./index.html">API</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/yutingzhao1991/ProxyTester">CODE</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">      
+<div class="row">
+    <div class="span2">
+        <ul class="nav nav-list affix">
+            <li>
+                <a href="#service">Service</a>
+                <a href="#unit">Unit</a>
+                <a href="#proxy">proxy</a>
+                <a href="#service-log">Service.log</a>
+                <a href="#service-set-data">Service.setData</a>
+                <a href="#service-get-data">Service.getData</a>
+                <a href="#service-deep-equal">Service.deepEqual</a>
+                <a href="#service-equal">Service.equal</a>
+                <a href="#service-not-deep-equal">Service.notDeepEqual</a>
+                <a href="#service-not-equal">Service.notEqual</a>
+                <a href="#service-not-strict-equal">Service.notStrictEqual</a>
+                <a href="#service-strict-equal">Service.equal</a>
+                <a href="#service-throws">Service.throws</a>
+                <a href="#unit-start">Unit.start</a>
+                <a href="#unit-stop">Unit.stop</a>
+                <a href="#unit-register-service">Unit.registerService</a>
+                <a href="#unit-add-listener">Unit.addListener</a>
+                <a href="#unit-remove-listener">Unit.removeListener</a>
+                <a href="#express">req & res</a>
+            </li>
+        </ul>
+    </div>
+    <div class="span10">
+        <section id="service">
+            <h2>Service</h2>
+            <p>
+                Service 也是一个对象，它对应一个代理规则。一个service就是对一类网络的响应与测试样例。
+            </p>
+            <strong>Demo:</strong>
+            <pre>
+var Service = require('../../../proxy-tester/index').Service;
+var service = new Service({
+    url: 'http://ad.m.iqiyi.com/api',
+    name: 'api',
+    method: 'get',
+    verify: function(req, res, services) {
+        // testing code
+        // response and testing
+        // you can use this.xxx and req, res, services ...
+    }
+});
+            </pre>
+        </section>
+        <section id="unit">
+            <h2>Unit</h2>
+            <p>
+                Unit 是一个对象，它对于一组测试样例，一个Unit可以包含多个Service。
+            </p>
+            <strong>Demo:</strong>
+            <pre>
+var Unit = require('proxy-tester').Unit;
+unit = new Unit(UNIT_ID, [
+    service1,
+    service2,
+    ...
+]);
+            </pre>
+        </section>
+        <section id="unit">
+            <h2>proxy</h2>
+            <p>
+                proxy 是代理暴露出来的方法，用于将http请求代理到测试代理服务
+            </p>
+            <strong>Demo:</strong>
+            <pre>
+var app = express();
+app.use(function(req, res) {
+    require('proxy-tester').proxy(req, res);
+});
+app.listen(80);
+            </pre>
+        </section>
+        <section id="service-log">
+            <h2>Service.log</h2>
+            <p>输出log日志（触发unit的log事件）</p>
+            <pre>
+service.log('testing infomation');
+            </pre>
+        </section>
+        <section id="service-set-data">
+            <h2>Service.setData</h2>
+            <p>设置该测试样例的数据（用于Unit下各个Service的数据共享）</p>
+            <pre>
+service.setData({
+    t: 'hello',
+    ...
+});
+            </pre>
+        </section>
+        <section id="service-get-data">
+            <h2>Service.getData</h2>
+            <p>获取样例数据</p>
+            <pre>
+service.getData();
+            </pre>
+        </section>
+        <section id="service-deep-queal">
+            <h2>Service.deepEqual</h2>
+            <p>断言：深度相等</p>
+            <p>
+                <h6>params</h6>
+                <strong>actual:</strong>{*}
+                <br>
+                <strong>expected:</strong>{*}
+                <br>
+                <strong>message:</strong>{String}
+            </p>
+            <pre>
+service.deepEqual({
+    a: '1'
+}, {
+    a: '2'
+}, 'testing message info');
+            </pre>
+        </section>
+        <section id="service-queal">
+            <h2>Service.equal</h2>
+            <p>断言：相等</p>
+            <p>
+                <h6>params</h6>
+                <strong>actual:</strong>{*}
+                <br>
+                <strong>expected:</strong>{*}
+                <br>
+                <strong>message:</strong>{String}
+            </p>
+            <pre>
+service.equal({
+    a: '1'
+}, {
+    a: '2'
+}, 'testing message info');
+            </pre>
+        </section>
+        <section id="service-not-deep-queal">
+            <h2>Service.notDeepEqual</h2>
+            <p>断言：非深度相等</p>
+            <p>
+                <h6>params</h6>
+                <strong>actual:</strong>{*}
+                <br>
+                <strong>expected:</strong>{*}
+                <br>
+                <strong>message:</strong>{String}
+            </p>
+            <pre>
+service.notDeepEqual(true, false, 'testing message info');
+            </pre>
+        </section>
+        <section id="service-not-queal">
+            <h2>Service.notEqual</h2>
+            <p>断言：非相等</p>
+            <p>
+                <h6>params</h6>
+                <strong>actual:</strong>{*}
+                <br>
+                <strong>expected:</strong>{*}
+                <br>
+                <strong>message:</strong>{String}
+            </p>
+            <pre>
+service.notEqual(true, false, 'testing message info');
+            </pre>
+        </section>
+        <section id="service-not-strict-equal">
+            <h2>Service.notStrictEqual</h2>
+            <p>断言：非严格相等</p>
+            <p>
+                <h6>params</h6>
+                <strong>actual:</strong>{*}
+                <br>
+                <strong>expected:</strong>{*}
+                <br>
+                <strong>message:</strong>{String}
+            </p>
+            <pre>
+service.notStrictEqual(1, '1', 'testing message info');
+            </pre>
+        </section>
+        <section id="service-not-strict-equal">
+            <h2>Service.strictEqual</h2>
+            <p>断言：严格相等</p>
+            <p>
+                <h6>params</h6>
+                <strong>actual:</strong>{*}
+                <br>
+                <strong>expected:</strong>{*}
+                <br>
+                <strong>message:</strong>{String}
+            </p>
+            <pre>
+service.strictEqual(1, '1', 'testing message info');
+            </pre>
+        </section>
+        <section id="service-throws">
+            <h2>Service.throws</h2>
+            <p>抛出错误</p>
+            <p>
+                <h6>params</h6>
+                <strong>message:</strong>{String}
+            </p>
+            <pre>
+service.throws('testing error');
+            </pre>
+        </section>
+        <section id="unit-start">
+            <h2>Unit.start</h2>
+            <p>运行这一组测试样例</p>
+            <pre>
+unit.start();
+            </pre>
+        </section>
+        <section id="unit-stop">
+            <h2>Unit.stop</h2>
+            <p>停止这一组测试样例</p>
+            <pre>
+unit.stop();
+            </pre>
+        </section>
+        <section id="unit-register-service">
+            <h2>Unit.registerService</h2>
+            <p>为该Unit添加一个Service</p>
+            <pre>
+unit.registerService(service);
+            </pre>
+        </section>
+        <section id="unit-add-listener">
+            <h2>Unit.addListener</h2>
+            <p>监听该组Unit产出的信息</p>
+            <p>
+                <h6>params</h6>
+                <strong>type:</strong>{'log' | 'success' | 'failure'}, event type<br>
+                <strong>hanlder:</strong>{Function}
+            </p>
+            <p>
+                <h6>return</h6>
+                <strong>message:</strong>{String}
+            </p>
+            <pre>
+unit.addListener('log', function(e) {
+    console.log(e.message);
+});
+            </pre>
+        </section>
+        <section id="unit-remove-listener">
+            <h2>Unit.removeListener</h2>
+            <p>移除事件监听</p>
+            <p>
+                <h6>params</h6>
+                <strong>type:</strong>{'log' | 'success' | 'failure'}, event type
+                <strong>hanlder:</strong>{Function}
+            </p>
+            <pre>
+unit.addListener('log', function(e) {
+    console.log(e.message);
+});
+            </pre>
+        </section>
+        <section id="express">
+            <h2>res & req</h2>
+            <p>
+                <a href="http://expressjs.com/api.html#req.params">req</a> 和 <a href="http://expressjs.com/api.html#res.status">res</a> 是 被express扩展的nodejs http 请求和返回的对象。具体api请参考<a href="http://expressjs.com/api.html">express</a>官方文档。
+            </p>
+        </section>
+    </div>
+</div>
+</div>
+<hr>
+<footer>
+    <div class="container">
+        <p>
+            author: <a href="http://yutingzhao.com">YuTingzhao</a>
+        </p>
+    </div>
+</footer>
+<script type="text/javascript" src="./lib/bootstrap/bootstrap.min.js"></script>
+</body>
+</html>
