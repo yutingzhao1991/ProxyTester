@@ -1,0 +1,10 @@
+@media (min-width: 980px) {
+  body {
+    padding-top: 48px;
+  }
+}
+
+.ast-checkbox {
+    margin-top: -2px !important;
+    margin-right: 3px !important;
+}
