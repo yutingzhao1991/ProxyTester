@@ -6,4 +6,4 @@ date: 2013 05 14
 
 doc: http://yutingzhao.com/ProxyTester/doc/
 
-version: 1.0.1
+version: 0.0.2

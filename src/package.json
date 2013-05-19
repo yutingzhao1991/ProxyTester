@@ -1,7 +1,7 @@
 {
   "name": "proxy-tester",
   "description": "http proxy automatic test framework.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": {
     "name": "Yu Tingzhao",
     "email": "yutingzhao1991@sina.com"
