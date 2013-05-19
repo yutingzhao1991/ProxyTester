@@ -300,56 +300,70 @@ Service.prototype.getData = function() {
 Service.prototype.deepEqual = function(actual, expected, message) {
     if(equiv(actual, expected)) {
         this._judge('ok', message);
+        return true;
     } else {
         this._judge('error', message);
+        return false;
     }
 };
 
 Service.prototype.equal = function(actual, expected, message) {
     if(actual == expected) {
         this._judge('ok', message);
+        return true;
     } else {
         this._judge('error', message);
+        return false;
     }
 };
 
 Service.prototype.notDeepEqual = function(actual, expected, message) {
     if(!equiv(actual, expected)) {
         this._judge('ok', message);
+        return true;
     } else {
         this._judge('error', message);
+        return false;
     }
 };
 
 Service.prototype.notEqual = function(actual, expected, message) {
     if(actual != expected) {
         this._judge('ok', message);
+        return true;
     } else {
         this._judge('error', message);
+        return false;
     }
 };
 
 Service.prototype.notStrictEqual = function(actual, expected, message) {
     if(actual !== expected) {
         this._judge('ok', message);
+        return true;
     } else {
         this._judge('error', message);
+        return false;
     }
 };
 
 Service.prototype.ok = function(state, message) {
     if(state) {
         this._judge('ok', message);
+        return true;
     } else {
         this._judge('error', message);
+        return false;
     }
 };
 
 Service.prototype.strictEqual = function(actual, expected, message) {
     if(actual === expected) {
         this._judge('ok', message);
+        return true;
     } else {
         this._judge('error', message);
+        return false;
     }
 };
 
