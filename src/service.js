@@ -1,3 +1,6 @@
+var EventDeliver = require('./eventDeliver');
+var proxy = require('./proxy');
+
 var Service = function(data) {
     if(!data) {
         // ready is a flag mark this service is ready when it start
@@ -9,6 +12,8 @@ var Service = function(data) {
         this._ready = false;
         return;
     }
+    this._eventDeliver = new EventDeliver();
+    this._proxyService = proxy;
     this._options = data;
     this._name = this.name = data.name;
     // service response url url, like '/show'
@@ -236,30 +241,35 @@ var equiv = (function() {
 
 //private
 
-Service.prototype._onRegister = function(unit) {
-    this._unit = unit;
-};
-Service.prototype._onUnregister = function(unit) {
-    service._unit._proxy.unregister(this._url, this);
-    service._unit = null;
+Service.prototype._addListener = function(handler) {
+    this._eventDeliver.addEventListener('message', function(e) {
+        handler(e.data.type, e.data.data);
+    });
 };
 
-Service.prototype._start = function() {
+Service.prototype._dispatchEvent = function(type, data) {
+    this._eventDeliver.dispatchEvent('message', {
+        type: type,
+        data: data
+    });
+};
+Service.prototype._start = function(unit) {
     console.log('start service: ' + this._name);
     var service = null;
+    this._unit = unit;
     if(!this._ready) {
-        this._unit._dispatchEvent('log', {
+        this._dispatchEvent('log', {
             message: 'not available service: ' + this._name
         });
         return;
     }
-    this._unit._dispatchEvent('log', {
+    this._dispatchEvent('log', {
         message: 'start proxy service at: [' + this._method + ']' + this._url
     });
-    this._unit._proxy.register(this._url, this);
+    this._proxyService.register(this._url, this);
 };
 Service.prototype._stop = function() {
-    this._unit._proxy.unregister(this._url, this);
+    this._proxyService.unregister(this._url, this);
 };
 Service.prototype._proxy = function(req, res, callbacks) {
     // TODO: callback when response end
@@ -269,6 +279,7 @@ Service.prototype._judge = function(type, message) {
     console.log('judge type: ' + type + ' [' + message + ']');
     this._unit._onJudge(this, type, message);
 };
+Service.prototype._
 
 
 /********* service public api ************/
@@ -279,7 +290,7 @@ Service.prototype._judge = function(type, message) {
 //
 
 Service.prototype.log = function(content) {
-    this._unit._dispatchEvent('log', {
+    this._dispatchEvent('log', {
         message: content
     });
 };
