@@ -10,33 +10,22 @@
     <script type="text/javascript" src="./lib/jquery/jquery-1.8.2.min.js"></script>
 </head>
 <body>
-<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container">
-            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </a>
-            <a class="brand" href="./index.html">ProxyTester</a>
-            <div class="nav-collapse collapse">
-                <ul class="nav">
-                    <li class="active">
-                        <a href="./index.html">API</a>
-                    </li>
-                    <li>
-                        <a href="https://github.com/yutingzhao1991/ProxyTester">CODE</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+<a href="https://github.com/yutingzhao1991/ProxyTester">
+    <img style="position: absolute; top: -7px; right: 0; border: 0" src="https://i.alipayobjects.com/e/201211/1dbSqT9ykm.png" width="149" height="149" alt="Fork me on GitHub">
+</a>
+<header>
+    <div class="container">
+        <h1>ProxyTester</h1>
+        <p class="lead">代理测试者 - Enjoy coding</p>
     </div>
-</div>
-<div class="container">      
+</header>
+<hr>
+<div class="container">
 <div class="row">
     <div class="span2">
         <ul class="nav nav-list affix">
             <li>
+                <a href="#usage">Usage</a>
                 <a href="#service">Service</a>
                 <a href="#unit">Unit</a>
                 <a href="#proxy">proxy</a>
@@ -48,7 +37,7 @@
                 <a href="#service-not-deep-equal">Service.notDeepEqual</a>
                 <a href="#service-not-equal">Service.notEqual</a>
                 <a href="#service-not-strict-equal">Service.notStrictEqual</a>
-                <a href="#service-strict-equal">Service.equal</a>
+                <a href="#service-strict-equal">Service.strictEqual</a>
                 <a href="#service-throws">Service.throws</a>
                 <a href="#unit-start">Unit.start</a>
                 <a href="#unit-stop">Unit.stop</a>
@@ -60,6 +49,12 @@
         </ul>
     </div>
     <div class="span10">
+        <section id="service">
+            <h2>Usage</h2>
+            <pre>
+npm install proxy-tester
+            </pre>
+        </section>
         <section id="service">
             <h2>Service</h2>
             <p>
