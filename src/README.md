@@ -2,6 +2,6 @@ A automatic test tool for purl http web service.
 
 author: http://yutingzhao.com
 
-date: 2013 05 02
+date: 2013 05 14
 
-version: 1.0.1
+doc: http://yutingzhao.com/ProxyTester/doc/

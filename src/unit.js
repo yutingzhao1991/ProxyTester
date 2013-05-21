@@ -9,7 +9,6 @@ var proxy = require('./proxy');
 var Unit = function(name, services) {
     this._eventDeliver = new EventDeliver();
     this._name = name;
-    this._proxy = proxy;
     this._servicesMap = {};
     console.log('init unit: ' + name);
     if(services) {
@@ -29,7 +28,10 @@ Unit.prototype._registerService = function(service) {
         return;
     }
     this._servicesMap[service.name] = service;
-    service._onRegister(this);
+    var _this = this;
+    service._addListener(function(type, data) {
+        _this._eventDeliver.dispatchEvent(type, data);
+    });
 };
 
 Unit.prototype._dispatchEvent = function(type, data) {
@@ -55,7 +57,7 @@ Unit.prototype._onJudge = function(service, type, message) {
 Unit.prototype.start = function() {
     console.log('start unit: ' + this._name);
     for(var i in this._servicesMap) {
-        this._servicesMap[i]._start();
+        this._servicesMap[i]._start(this);
     }
 };
 Unit.prototype.stop = function() {

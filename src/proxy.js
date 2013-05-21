@@ -55,6 +55,7 @@ exports.unregister = function(source) {
 exports.proxy = function(req, res) {
     proxyHandler && proxyHandler('request', req);
     var url = req.protocol + '://' + req.host + req.path;
+    console.log('on service proxy: ', url, proxyMap[url]);
     if (proxyMap[url] && proxyMap[url]._method.toLocaleLowerCase() == req.method.toLocaleLowerCase()) {
         // there is a proxt on this proxy
         proxyMap[url]._proxy(req, res, function() {

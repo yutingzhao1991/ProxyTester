@@ -1,7 +1,7 @@
 {
   "name": "proxy-tester",
   "description": "http proxy automatic test framework.",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "author": {
     "name": "Yu Tingzhao",
     "email": "yutingzhao1991@sina.com"
@@ -13,6 +13,9 @@
   "main": "./index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/yutingzhao1991/proxyTest.git"
-  }
+    "url": "git://github.com/yutingzhao1991/ProxyTest.git"
+  },
+  "readme": "A automatic test tool for purl http web service.\r\n\r\nauthor: http://yutingzhao.com\r\n\r\ndate: 2013 05 14\r\n\r\ndoc: http://yutingzhao.com/ProxyTester/doc/\r\n\r\nversion: 0.0.2",
+  "_id": "proxy-tester@0.0.2",
+  "_from": "proxy-tester@0.0.2"
 }
